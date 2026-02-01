@@ -106,7 +106,7 @@ export default function SeriesReelPlayer({ params }: { params: Promise<{ id: str
                  </div>
                  <h2 className="text-2xl font-black text-white uppercase mb-2">VIP Episode</h2>
                  <p className="text-gray-400 text-sm font-medium mb-8 max-w-xs">
-                    ကိုကိုရေ... ဒီအပိုင်းကိုကြည့်ဖို့ <br/> VIP Member ဝင်ထားဖို့ လိုပါတယ်ရှင့်
+                     ဒီအပိုင်းကိုကြည့်ဖို့ <br/> VIP Member ဝင်ထားဖို့ လိုပါတယ်ရှင့်
                  </p>
                  <Link href="/vip" className="w-full max-w-xs py-4 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-2xl text-black font-black uppercase tracking-widest shadow-xl active:scale-95 transition-all">
                     Unlock Now

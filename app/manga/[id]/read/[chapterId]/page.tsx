@@ -1,5 +1,6 @@
 import { pb } from "@/lib/pocketbase";
 import { getFreshUser } from "@/lib/get-user"; 
+
 import Link from "next/link";
 import MangaImageViewer from "../../../../components/MangaImageViewer"; // 👈 အသစ် import လုပ်မယ်
 
@@ -10,8 +11,9 @@ export default async function MangaReader({ params }: { params: Promise<{ id: st
 
   // 🛡️ ၁။ User Status
   const user = await getFreshUser();
-  const isVipUser = user?.is_vip === true;
+  const isVipUser = user?.is_vip === true; 
 
+  
   // ၂။ Chapter Data
   const chapter = await pb.collection('manga_chapters').getOne(chapterId, {
     requestKey: null,
@@ -29,7 +31,7 @@ export default async function MangaReader({ params }: { params: Promise<{ id: st
           </div>
           <h2 className="text-xl font-black text-yellow-500 uppercase tracking-widest">VIP Only</h2>
           <p className="text-gray-400 text-xs mt-4 mb-8 font-bold uppercase tracking-tighter">
-              ကိုကိုရေ... VIP Member ဖြစ်မှ <br/> ဒီအခန်းကို ဖတ်ရှုလို့ရပါမယ်ရှင့်
+               VIP Member ဖြစ်မှ <br/> ဒီအခန်းကို ဖတ်ရှုလို့ရပါမယ်ရှင့်
           </p>
           <Link href="/vip" className="block w-full py-4 bg-yellow-600 rounded-2xl text-white font-black uppercase text-xs tracking-widest shadow-lg active:scale-95 transition-all">
             Upgrade Now

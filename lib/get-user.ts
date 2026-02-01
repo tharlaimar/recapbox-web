@@ -48,24 +48,31 @@ export async function getFreshUser() {
           requestKey: null, 
           headers: { "Cache-Control": "no-store" },
           // @ts-ignore
-          "t": new Date().getTime(), 
+          query: { t: Date.now() } 
         });
         if (freshUser.is_vip === true && freshUser.vip_expiry_date) {
             const expiryDate = new Date(freshUser.vip_expiry_date);
             const now = new Date();
 
             // ရက်လွန်နေပြီဆိုရင်
-            if (now > expiryDate) {
-                console.log(`🚫 VIP Expired for ${freshUser.email}. Auto Downgrading...`);
+            // get-user.ts ရဲ့ VIP expiry စစ်တဲ့အပိုင်းမှာ
+if (now > expiryDate) {
+    console.log(`🚫 VIP Expired for ${freshUser.email}. Auto Downgrading...`);
 
-                // 1. Database မှာ VIP ဖြုတ်မယ်
-                await pb.collection("users").update(freshUser.id, { 
-                    is_vip: false, 
-                });
+    try {
+        // 🔥 $autoCancel: false ထည့်မှ error မတက်မှာပါ
+        await pb.collection("users").update(freshUser.id, { 
+            is_vip: false, 
+        }, { 
+            $autoCancel: false 
+        });
 
-                // 2. ပြန်ပို့မယ့် User Data ကိုလည်း VIP ဖြုတ်ပြီးမှ ပို့မယ် (ချက်ချင်း Lock ကျအောင်)
-                freshUser.is_vip = false;
-            }
+        // ချက်ချင်းသက်ရောက်မှုရှိအောင် data ကိုပါ ပြောင်းလိုက်မယ်
+        freshUser.is_vip = false;
+    } catch (err) {
+        console.error("Failed to downgrade user:", err);
+    }
+}
         }
         // 🔥🔥🔥 END: VIP AUTO EXPIRY CHECK 🔥🔥🔥
         return freshUser;

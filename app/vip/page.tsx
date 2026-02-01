@@ -10,11 +10,19 @@ export default function VIPPage() {
   const [transactionId, setTransactionId] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
   // 🔴🔴🔴 KEY များ
   const IMGBB_API_KEY = "13f6f317dd08cf5b34fe4193c8d80380";
   const TELEGRAM_BOT_TOKEN = "8335167806:AAH6cbCe-w35EVHw_ekXq4TEobyOlxitnAo";
   const TELEGRAM_CHAT_ID = "-1003372675502";
+
+  // 🔥 Copy Function
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopyStatus(text);
+    setTimeout(() => setCopyStatus(null), 2000); // ၂ စက္ကန့်ကြာရင် ပြန်ဖျောက်မယ်
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -126,14 +134,45 @@ export default function VIPPage() {
       </div>
 
       {/* 💳 Payment Method */}
+      <p className="text-xs text-blue-400 font-bold mb-4 uppercase">Payment Methods</p>
       <div className="bg-blue-600/10 border border-blue-500/20 rounded-3xl p-6 mb-8">
-        <p className="text-xs text-blue-400 font-bold mb-4 uppercase">Payment Methods</p>
+        
         <div className="flex items-center justify-between">
           <div>
             <p className="font-bold text-sm">KPay, AYA, UAB (Hsu Myat Noe Khin)</p>
+            <p className="text-xl font-black text-blue-400 mt-1">09793200264</p>
+            
+          </div>
+          <button 
+            onClick={() => handleCopy("09793200264")}
+            className={`p-3 rounded-2xl transition-all active:scale-90 ${copyStatus === "09793200264" ? 'bg-green-500 text-white' : 'bg-white/5 text-yellow-500'}`}
+          >
+            {copyStatus === "09793200264" ? (
+              <span className="text-[10px] font-bold">COPIED!</span>
+            ) : (
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3zM5 8v12h8V8H5z"/></svg>
+            )}
+          </button>
+        </div>
+      </div>
+      <div className="bg-blue-600/10 border border-blue-500/20 rounded-3xl p-6 mb-8">
+        
+        <div className="flex items-center justify-between">
+          <div>
+          
+            <p className="font-bold text-sm">KPay, AYA, UAB, Wave (Myo Si Thu)</p>
             <p className="text-xl font-black text-blue-400 mt-1">09977228155</p>
           </div>
-          <button className="p-3 bg-white/5 rounded-2xl text-yellow-500"><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3zM5 8v12h8V8H5z"/></svg></button>
+          <button 
+            onClick={() => handleCopy("09977228155")}
+            className={`p-3 rounded-2xl transition-all active:scale-90 ${copyStatus === "09977228155" ? 'bg-green-500 text-white' : 'bg-white/5 text-yellow-500'}`}
+          >
+            {copyStatus === "09977228155" ? (
+              <span className="text-[10px] font-bold">COPIED!</span>
+            ) : (
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3zM5 8v12h8V8H5z"/></svg>
+            )}
+          </button>
         </div>
       </div>
 

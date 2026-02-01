@@ -41,6 +41,7 @@ export default function RootLayout({
         {/* iOS အတွက် Address Bar ပျောက်စေမယ့် meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"></meta>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#051139] text-white overflow-x-hidden min-h-screen flex flex-col`}

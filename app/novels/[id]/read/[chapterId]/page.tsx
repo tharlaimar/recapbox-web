@@ -16,6 +16,9 @@ export default async function NovelReader({
   // 2. PDF URL
   const pdfFullUrl = `${R2_DOMAIN}/${chapter.collectionId}/${chapter.id}/${chapter.pdf_url}`;
 
+  // 🔥 Google Docs Viewer URL (iOS မှာ PDF အကုန်မြင်ရအောင်)
+  const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfFullUrl)}&embedded=true`;
+
   return (
     <main className="min-h-screen bg-[#1a1a1a] text-white flex flex-col">
       
@@ -39,15 +42,31 @@ export default async function NovelReader({
       </div>
 
       {/* PDF Viewer */}
-      <div className="flex-1 w-full flex justify-center bg-black overflow-hidden relative">
+      <div className="flex-1 w-full bg-black relative overflow-auto">
         {chapter.pdf_url ? (
-          <iframe
-            src={`${pdfFullUrl}#view=FitH`} 
-            className="w-full max-w-5xl h-[calc(100vh-64px)] border-none"
-            title={chapter.title}
-          />
+          <div className="w-full h-full flex flex-col">
+            {/* 🔥 iOS/Mobile အတွက် ပိုကောင်းအောင် iframe ကုဒ်ကို ပြင်ထားပါတယ် */}
+            <iframe
+              src={googleViewerUrl} 
+              className="w-full flex-1 border-none shadow-2xl"
+              style={{ minHeight: 'calc(100vh - 64px)' }}
+              title={chapter.title}
+              allow="fullscreen"
+            />
+            
+            {/* 💡 တကယ်လို့ iframe နဲ့ ကြည့်ရတာ အဆင်မပြေတဲ့ User တွေအတွက် Download button လေးပါ ထည့်ပေးထားမယ် */}
+            <div className="p-2 bg-black/50 text-center">
+                <a 
+                  href={pdfFullUrl} 
+                  target="_blank" 
+                  className="text-[10px] text-blue-400 font-bold uppercase underline"
+                >
+                  Open Direct PDF (If can't scroll)
+                </a>
+            </div>
+          </div>
         ) : (
-          <div className="flex items-center justify-center h-96 text-gray-500">PDF not found.</div>
+          <div className="flex items-center justify-center h-96 text-gray-500 font-bold">PDF not found.</div>
         )}
       </div>
     </main>
