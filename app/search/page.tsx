@@ -54,7 +54,8 @@ export default function SearchPage() {
           }
 
           return (
-            <Link key={item.id} href={`/${path}/${item.id}`} className="group active:scale-95 transition-all">
+            <Link key={item.id} 
+  href={path === 'videos' ? `/watch/${item.id}` : `/${path}/${item.id}`} className="group active:scale-95 transition-all">
               <div className="bg-[#0a192f]/60 rounded-2xl overflow-hidden border border-white/5 shadow-lg">
                 {/* 📏 Aspect Ratio Logic: Videos ဆိုရင် 16/9 ကျန်တာ 3/4 */}
                 <div className={`relative ${path === 'videos' ? 'aspect-video' : 'aspect-[3/4]'}`}>
