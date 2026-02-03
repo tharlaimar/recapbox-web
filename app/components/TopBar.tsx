@@ -19,6 +19,21 @@ export default function TopBar() {
           // @ts-ignore
           "t": new Date().getTime(),
         });
+       // 🛡️ [Device Security Check] 
+        // Admin က device_ids ကို clear လုပ်လိုက်ရင် (စာရင်းအားသွားရင်) အလိုအလျောက် Logout လုပ်ခိုင်းမယ်
+        const currentDeviceId = navigator.userAgent;
+        if (freshUser.device_ids && freshUser.device_ids.length === 0) {
+           pb.authStore.clear();
+           window.location.href = "/login"; // Login ပြန်ခိုင်းတာ
+           return;
+        }
+
+        // လက်ရှိ Device က စာရင်းထဲမှာ မရှိတော့ရင် (Admin က တစ်လုံးချင်းဖျက်လိုက်ရင်) Logout လုပ်မယ်
+        if (freshUser.device_ids && !freshUser.device_ids.includes(currentDeviceId)) {
+           pb.authStore.clear();
+           window.location.href = "/login";
+           return;
+        } 
         setUser(freshUser);
       } catch (e) {
         console.error("User fetch error:", e);
@@ -74,7 +89,7 @@ export default function TopBar() {
       {/* Container ကို fixed ထားပြီး အထဲမှာ အထပ်လိုက် စီမယ် (Design ကို မထိခိုက်အောင်) */}
       <div className="fixed top-0 left-0 w-full z-[99999] flex flex-col gap-0 shadow-2xl">
         
-        {/* ၁။ ပင်မ TopBar (ကိုကို့ Design အတိုင်း လုံးဝ မပြောင်းလဲပါ) */}
+        {/* ၁။ ပင်မ TopBar ( Design အတိုင်း လုံးဝ မပြောင်းလဲပါ) */}
         <div className="w-full h-16 bg-[#0f0f0f]/90 backdrop-blur-md flex items-center justify-between px-4 border-b border-white/5">
           
           {/* Left Side: Profile Avatar */}
@@ -119,10 +134,10 @@ export default function TopBar() {
             <Link href="/profile" className="block whitespace-nowrap overflow-hidden">
               <div className="inline-block animate-marquee-fast">
                 <span className="text-[10px] font-black uppercase tracking-widest text-black px-4">
-                  🔥 Become a VIP to enjoy AD-FREE experience and support RECAPBOX! 🔥
+                  🔥 Become a VIP to unlock all vip contact and support RECAPBOX! 🔥
                 </span>
                 <span className="text-[10px] font-black uppercase tracking-widest text-black px-4">
-                  🔥 Become a VIP to enjoy AD-FREE experience and support RECAPBOX! 🔥
+                  🔥 Become a VIP to unlock all vip contact and support RECAPBOX! 🔥
                 </span>
               </div>
             </Link>

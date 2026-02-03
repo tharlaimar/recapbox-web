@@ -37,7 +37,7 @@ export default function Home() {
   return <HomeContent />;
 }
 
-// 📺 မူရင်း Video List ကုဒ်တွေကို ဒီထဲမှာပဲ ဆက်ထားပေးတယ်နော် ကိုကို
+// 📺 မူရင်း Video List ကုဒ်တွေကို ဒီထဲမှာပဲ ဆက်ထားပေးတယ်နော်
 function HomeContent() {
   const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -110,7 +110,7 @@ function HomeContent() {
           );
         }) : (
           <div className="text-center py-20 text-gray-500">
-            ဗီဒီယိုတွေ ရှိမနေဘူးဖြစ်နေတယ် ကိုကိုရေ... <br/>
+            ဗီဒီယိုတွေ ရှိမနေဘူးဖြစ်နေတယ်... <br/>
             <span className="text-[10px] uppercase">Check Connection & Database</span>
           </div>
         )}

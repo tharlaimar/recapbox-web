@@ -50,7 +50,7 @@ export default function NotificationsPage() {
   };
 
   const handleClearAll = () => {
-    if (confirm("စာတွေအကုန်လုံးကို ဖျက်ပစ်မှာ သေချာလား ကိုကို?")) {
+    if (confirm("စာတွေအကုန်လုံးကို ဖျက်ပစ်မှာ သေချာလား?")) {
       // လက်ရှိ ရှိသမျှ ID တွေအကုန် localStorage ထဲ ပစ်ထည့်မယ်
       const saved = localStorage.getItem("deleted_notis");
       const deletedIds = saved ? JSON.parse(saved) : [];

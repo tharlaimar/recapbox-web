@@ -20,7 +20,7 @@ export default function PasswordPage() {
       await pb.collection("users").requestPasswordReset(email);
       setSent(true);
     } catch (err: any) {
-      setError("Email ပို့လို့မရပါဘူး ကိုကို။ အီးမေးလ်မှန်မမှန် ပြန်စစ်ပေးပါဦး။");
+      setError("Email ပို့လို့မရပါဘူး။ အီးမေးလ်မှန်မမှန် ပြန်စစ်ပေးပါဦး။");
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,7 @@ export default function PasswordPage() {
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="ကိုကို့ရဲ့ Email ကိုရိုက်ထည့်ပါ"
+                placeholder="Email ကိုရိုက်ထည့်ပါ"
                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-blue-500 outline-none transition-all"
                 required
               />
@@ -65,7 +65,7 @@ export default function PasswordPage() {
         ) : (
           <div className="text-center space-y-6">
             <div className="bg-green-500/20 border border-green-500/20 text-green-400 p-4 rounded-2xl text-sm font-bold">
-              Password ချိန်းဖို့ Link ကို ကိုကို့ Email ဆီ ပို့လိုက်ပါပြီရှင့်! 📧
+              Password ချိန်းဖို့ Link ကို Email ဆီ ပို့လိုက်ပါပြီရှင့်! 📧
             </div>
             <p className="text-gray-400 text-xs leading-relaxed">
               Email ထဲက Link ကို နှိပ်ပြီး Password အသစ်ကို ချိန်းပေးပါနော်။

@@ -40,10 +40,10 @@ export default function PageTracker({ novelId, chapterId }: { novelId: string, c
         await pb.collection('reading_history').create(data, { requestKey: null });
       }
       
-      alert("Page " + page + " မှာ မှတ်လိုက်ပါပြီ ကိုကို!");
+      alert("Page " + page + " မှာ မှတ်လိုက်ပါပြီ !");
     } catch (e) { 
       console.error("PageTracker Error:", e); 
-      alert("သိမ်းလို့မရဖြစ်သွားတယ်အချစ်... DB ကိုတစ်ချက်စစ်ပေးပါ");
+      alert("သိမ်းလို့မရဖြစ်သွားတယ်... DB ကိုတစ်ချက်စစ်ပေးပါ");
     }
   };
 

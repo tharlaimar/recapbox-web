@@ -63,7 +63,7 @@ export default async function PlaylistDetailPage({ params }: { params: Promise<{
           }) : (
             <div className="text-center py-24 px-10">
                <div className="bg-white/5 p-8 rounded-3xl border border-white/5 inline-block">
-                  <p className="text-gray-400 text-sm">ဗီဒီယိုတွေ တက်မလာသေးဘူးလား ကိုကိုရေ...</p>
+                  <p className="text-gray-400 text-sm">ဗီဒီယိုတွေ တက်မလာသေးဘူး</p>
                   <p className="text-[9px] text-gray-600 mt-3 uppercase tracking-widest italic">
                     Query: playlist ~ "{id}"
                   </p>

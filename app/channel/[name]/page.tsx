@@ -16,7 +16,7 @@ export default function ChannelPage({ params }: { params: Promise<{ name: string
   useEffect(() => {
     async function fetchData() {
       try {
-        // ၁။ ချန်နယ်ဒေတာယူမယ် - ကိုကို့ database ထဲက field နာမည်တွေအတိုင်း ယူမယ်
+        // ၁။ ချန်နယ်ဒေတာယူမယ် -့ database ထဲက field နာမည်တွေအတိုင်း ယူမယ်
         const channel = await pb.collection('channels').getFirstListItem(`name="${decodedName}"`, {
           requestKey: null,
         });

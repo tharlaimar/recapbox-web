@@ -27,7 +27,7 @@ export default function RegisterPage() {
       router.push("/"); 
       router.refresh();
     } catch (err: any) {
-      setError("အကောင့်ဖွင့်ရာတွင် အမှားအယွင်းရှိနေပါသည် ကိုကို");
+      setError("အကောင့်ဖွင့်ရာတွင် အမှားအယွင်းရှိနေပါသည်");
     } finally {
       setLoading(false);
     }

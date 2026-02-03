@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// 🖼️ ကိုကိုပေးထားတဲ့ Avatar Link များ (အသစ်ထည့်ထားသည်)
+// 🖼️ ပေးထားတဲ့ Avatar Link များ (အသစ်ထည့်ထားသည်)
 const AVATAR_LIST = [
   "https://cdn-icons-png.flaticon.com/512/4140/4140048.png",
   "https://cdn-icons-png.flaticon.com/512/4140/4140047.png",
@@ -48,7 +48,7 @@ export default function ProfilePage() {
   const [newName, setNewName] = useState("");
   const [updating, setUpdating] = useState(false);
 
-  // 🔄 VIP Status Logic (ကိုကို့ မူရင်းကုဒ်အတိုင်း)
+  // 🔄 VIP Status Logic ( မူရင်းကုဒ်အတိုင်း)
   const fetchFreshUser = async () => {
     if (pb.authStore.isValid && pb.authStore.model?.id) {
       try {

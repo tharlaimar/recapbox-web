@@ -27,7 +27,7 @@ export default function HistoryTracker({ type, contentId, chapterId }: Props) {
         const existing = await pb.collection('reading_history').getList(1, 1, {filter, 
             requestKey: null });
 
-        // ၂။ Save မယ့် Data ကို ပြင်မယ် (ကိုကို့ DB field တွေအတိုင်း)
+        // ၂။ Save မယ့် Data ကို ပြင်မယ် ( DB field တွေအတိုင်း)
         const data: any = {
            user: userId,
            type: type,
