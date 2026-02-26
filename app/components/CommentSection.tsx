@@ -32,8 +32,9 @@ export default function CommentSection({ type, itemId }: CommentProps) {
   useEffect(() => {
     async function fetchComments() {
       try {
+        const sanitizedItemId = itemId.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
         const result = await pb.collection('comments').getList(1, 50, {
-          filter: `content_id = "${itemId}"`, 
+          filter: `content_id = "${sanitizedItemId}"`, 
           sort: '-created',
           expand: 'user', 
         });

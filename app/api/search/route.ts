@@ -8,12 +8,13 @@ export async function GET(request: Request) {
   if (!query) return NextResponse.json({ manga: [], novels: [], videos: [], reels: [] });
 
   try {
+    const sanitizedQuery = query.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
     // ၄ မျိုးလုံးကို ပြိုင်တူရှာမယ် (Performance ကောင်းအောင် Promise.all သုံးထားတယ်)
     const [mangaRes, novelRes, videoRes, reelRes] = await Promise.all([
-      pb.collection('manga').getList(1, 10, { filter: `title ~ "${query}"`, requestKey: null }),
-      pb.collection('novels').getList(1, 10, { filter: `title ~ "${query}"`, requestKey: null }),
-      pb.collection('videos').getList(1, 10, { filter: `title ~ "${query}"`, requestKey: null }),
-      pb.collection('reel_series').getList(1, 10, { filter: `title ~ "${query}"`, requestKey: null }),
+      pb.collection('manga').getList(1, 10, { filter: `title ~ "${sanitizedQuery}"`, requestKey: null }),
+      pb.collection('novels').getList(1, 10, { filter: `title ~ "${sanitizedQuery}"`, requestKey: null }),
+      pb.collection('videos').getList(1, 10, { filter: `title ~ "${sanitizedQuery}"`, requestKey: null }),
+      pb.collection('reel_series').getList(1, 10, { filter: `title ~ "${sanitizedQuery}"`, requestKey: null }),
     ]);
 
     return NextResponse.json({

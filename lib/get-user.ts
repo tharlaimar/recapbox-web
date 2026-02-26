@@ -1,4 +1,4 @@
-import { pb } from "@/lib/pocketbase";
+import { createPocketBase } from "@/lib/pocketbase";
 import { cookies } from "next/headers";
 
 export async function getFreshUser() {
@@ -6,6 +6,8 @@ export async function getFreshUser() {
   const authCookie = cookieStore.get("pb_auth");
 
   if (!authCookie?.value) return null;
+
+  const pb = createPocketBase();
 
   try {
     let token = "";
@@ -57,7 +59,7 @@ export async function getFreshUser() {
             // ရက်လွန်နေပြီဆိုရင်
             // get-user.ts ရဲ့ VIP expiry စစ်တဲ့အပိုင်းမှာ
 if (now > expiryDate) {
-    console.log(`🚫 VIP Expired for ${freshUser.email}. Auto Downgrading...`);
+    console.log(`🚫 VIP Expired for user ${freshUser.id}. Auto Downgrading...`);
 
     try {
         // 🔥 $autoCancel: false ထည့်မှ error မတက်မှာပါ
