@@ -4,6 +4,10 @@ import PocketBase from 'pocketbase';
 // 🔥 ကိုကို့ VPS (သို့) Local IP
 export const pb = new PocketBase('https://api.recapboxx.com');
 
+export function createPocketBase() {
+  return new PocketBase('https://api.recapboxx.com');
+}
+
 export const R2_DOMAIN = "https://file.recapboxx.com";
 
 // lib/pocketbase.ts သို့မဟုတ် သက်ဆိုင်ရာ နေရာမှာ ထည့်ပါ

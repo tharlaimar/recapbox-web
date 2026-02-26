@@ -23,8 +23,21 @@ export default function LoginPage() {
       const user = authData.record;
 
       // 📱 ၂။ Device Limit စစ်တဲ့အပိုင်း (Magic Start Here ✨)
-      // Browser ရဲ့ UserAgent ကိုယူမယ် (ဒါက Device တစ်ခုနဲ့တစ်ခု မတူအောင် ခွဲခြားဖို့ပါ)
-      const currentDeviceId = navigator.userAgent; 
+      // Persistent random device ID stored in localStorage
+      function getDeviceId(): string {
+        const key = 'recapbox_device_id';
+        try {
+          let deviceId = localStorage.getItem(key);
+          if (!deviceId) {
+            deviceId = crypto.randomUUID();
+            localStorage.setItem(key, deviceId);
+          }
+          return deviceId;
+        } catch {
+          return crypto.randomUUID();
+        }
+      }
+      const currentDeviceId = getDeviceId();
       let devices = user.device_ids || [];
 
       // ဒီ Device က စာရင်းထဲမှာ ရှိပြီးသားလား?
@@ -51,10 +64,11 @@ export default function LoginPage() {
       const cookieString = pb.authStore.exportToCookie({ 
         httpOnly: false, 
         path: '/', 
-        secure: false 
+        secure: true,
+        sameSite: 'Lax'
       });
       document.cookie = cookieString;
-      document.cookie = `pb_auth=${pb.authStore.token}; path=/; max-age=86400`;
+      document.cookie = `pb_auth=${pb.authStore.token}; path=/; max-age=86400; secure; SameSite=Lax`;
 
       router.push("/");
       router.refresh();

@@ -17,7 +17,7 @@ export default function SearchPage() {
       }
       setLoading(true);
       try {
-        const res = await fetch(`/api/search?q=${query}`);
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         if (res.ok) {
           const data = await res.json();
           setResults(data);

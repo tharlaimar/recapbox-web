@@ -14,7 +14,8 @@ export default async function WatchPage({
   const collectionName = "videos"; // Collection နာမည်
 
   const record = await pb.collection(collectionName).getOne(id);
-  const youtubeVideoId = record.video_id || record.url; 
+  const youtubeVideoId = record.video_id || record.url;
+  const safeVideoId = youtubeVideoId?.replace(/[^a-zA-Z0-9_-]/g, '') || '';
 
   return (
     <main className="min-h-screen bg-[#051139] text-white flex flex-col items-center pb-32"> 
@@ -32,7 +33,7 @@ export default async function WatchPage({
         {/* Player Container */}
         <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl bg-black ring-1 ring-white/10 z-10">
           <iframe
-            src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0`}
+            src={`https://www.youtube.com/embed/${safeVideoId}?autoplay=1&rel=0`}
             title={record.title}
             className="absolute top-0 left-0 w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -61,7 +62,7 @@ export default async function WatchPage({
         </div>
 
         {/* 💬 Comments Section */}
-        <CommentSection type="video" itemId={youtubeVideoId} />
+        <CommentSection type="video" itemId={safeVideoId} />
 
       </div>
     </main>
